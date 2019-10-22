@@ -1,0 +1,33 @@
+title: tarasyarema
+description: ""
+baseurl: ""
+
+url: "https://tarasyarema.com"
+
+google_analytics: UA-150757532-1
+
+author:
+  name: Taras Yarema
+  email: tarasyarema@pm.me
+
+# Build settings
+markdown: kramdown
+include:
+  - _pages
+
+# Assets
+sass:
+  sass_dir: _sass
+  style: compressed
+
+remote_theme: chesterhow/tale
+
+permalink:    /:year-:month-:day/:title
+paginate:     5
+
+plugins:
+  - jekyll-paginate
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
+exclude: [ Gemfile, Gemfile.lock, tale.gemspec ]
