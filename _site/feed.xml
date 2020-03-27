@@ -1,1 +1,514 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-23T00:01:01+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">tarasyarema</title><subtitle></subtitle><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><entry><title type="html">Hello world!</title><link href="http://localhost:4000/2019-10-22/hi" rel="alternate" type="text/html" title="Hello world!" /><published>2019-10-22T20:45:14+02:00</published><updated>2019-10-22T20:45:14+02:00</updated><id>http://localhost:4000/2019-10-22/hi</id><content type="html" xml:base="http://localhost:4000/2019-10-22/hi">&lt;p&gt;&lt;strong&gt;Hi!&lt;/strong&gt; This is my first post. I’m using &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; with &lt;a href=&quot;https://github.com/chesterhow/tale&quot;&gt;tale&lt;/a&gt;, a minamilist theme.&lt;/p&gt;</content><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><category term="random" /><summary type="html">Hi! This is my first post. I’m using Jekyll with tale, a minamilist theme.</summary></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-27T15:05:33+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">tarasyarema</title><subtitle></subtitle><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><entry><title type="html">Advent Of Corona: Day 6</title><link href="http://localhost:4000/2020-03-27/aoc6" rel="alternate" type="text/html" title="Advent Of Corona: Day 6" /><published>2020-03-27T13:00:00+01:00</published><updated>2020-03-27T13:00:00+01:00</updated><id>http://localhost:4000/2020-03-27/aoc6</id><content type="html" xml:base="http://localhost:4000/2020-03-27/aoc6">&lt;p&gt;This post is about the &lt;a href=&quot;https://adventofcorona.hackersatupc.org/#/problem/6&quot;&gt;day 6 problem of the Advent Of Corona challenge&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-problem&quot;&gt;The problem&lt;/h2&gt;
+
+&lt;p&gt;You are given a binary named &lt;code class=&quot;highlighter-rouge&quot;&gt;lagrange_baby&lt;/code&gt;. That’s all.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-solution&quot;&gt;The solution&lt;/h2&gt;
+
+&lt;p&gt;The first thing to do when you get a binary in a &lt;em&gt;CTF-like&lt;/em&gt; challenge like this is taking a look at what bash commands like &lt;code class=&quot;highlighter-rouge&quot;&gt;file&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;strings&lt;/code&gt; output you.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ taras-pc tmp → file lagrange_baby
+lagrange_baby: ELF 64-bit LSB shared object, x86-64, version 1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;SYSV&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, 
+dynamically linked, interpreter /lib64/l, 
+&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;GNU/Linux 3.2.0, BuildID[sha1]&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;76154f43151d7962511001b781c47a617a01b9bd, 
+not stripped
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ taras-pc tmp → strings &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; lagrange_baby
+/lib64/ld-linux-x86-64.so.2
+libc.so.6
+srand
+__isoc99_scanf
+puts
+__stack_chk_fail
+&lt;span class=&quot;nb&quot;&gt;printf
+&lt;/span&gt;strlen
+malloc
+__cxa_finalize
+__libc_start_main
+free
+GLIBC_2.7
+GLIBC_2.4
+GLIBC_2.2.5
+_ITM_deregisterTMCloneTable
+__gmon_start__
+_ITM_registerTMCloneTable
+gfff
+gfff
+VUUU
+VUUU
+AWAVI
+AUATL
+&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;A&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;A^A_
+noup
+still noup
+aaaaaaaaand stil noup
+flag&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\%&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;3&lt;span class=&quot;s2&quot;&gt;$&quot;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;From these outputs we know the following things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The binary is Linux &lt;code class=&quot;highlighter-rouge&quot;&gt;x64&lt;/code&gt; executable.&lt;/li&gt;
+  &lt;li&gt;There are some interesting strings: &lt;code class=&quot;highlighter-rouge&quot;&gt;noup&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;still noup&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;aaaaaaaaand stil noup&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;flag{\%s}&lt;/code&gt;.
+  There is nothing similar to a flag inside it, so I can suppose that it’s generated in execution time.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s take a deeper look into the binary. I choose Ghidra, but it can be done in any other GUI or terminal tool (r2, cutter, ida, …).&lt;/p&gt;
+
+&lt;h3 id=&quot;playing-around&quot;&gt;Playing around&lt;/h3&gt;
+
+&lt;p&gt;Before doing anything we will try to mess around with the binary:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ taras-pc tmp → ./lagrange_baby
+a
+noup
+λ taras-pc tmp → ./lagrange_baby
+1
+noup
+λ taras-pc tmp → ./lagrange_baby
+aaaaaaaaaaaaaaaaaaa
+noup
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Hm, interesting…&lt;/p&gt;
+
+&lt;h3 id=&quot;reversing-with-ghidra&quot;&gt;Reversing with Ghidra&lt;/h3&gt;
+
+&lt;p&gt;The basic steps to begin analyzing a binary are the following:&lt;/p&gt;
+
+&lt;h4 id=&quot;import-the-binary&quot;&gt;Import the binary&lt;/h4&gt;
+
+&lt;p&gt;Pretty straight-forward.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/aoc6-1.png&quot; alt=&quot;Import&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;analyze-it&quot;&gt;Analyze it&lt;/h4&gt;
+
+&lt;p&gt;Just analyze all.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/aoc6-2.png&quot; alt=&quot;Analyze&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;reversing&quot;&gt;Reversing&lt;/h4&gt;
+
+&lt;p&gt;First of all, I look that the functions panel and search for the &lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt; function.
+When you click at it it shows up a &lt;em&gt;C-like&lt;/em&gt; decompiled view of the function.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/aoc6-3.png&quot; alt=&quot;Main&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;One of the things I like about Ghidra is that it lets you redefine variable types and names. So you can change those definitions during the reversing and the flow is much easier to follow.&lt;/p&gt;
+
+&lt;p&gt;The first thing I do is redefine the main function to be &lt;code class=&quot;highlighter-rouge&quot;&gt;int main (void)&lt;/code&gt; and the &lt;code class=&quot;highlighter-rouge&quot;&gt;__isoc99_scanf&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;scanf&lt;/code&gt;.
+I notice that there are two &lt;code class=&quot;highlighter-rouge&quot;&gt;scanf&lt;/code&gt; in the main function: &lt;code class=&quot;highlighter-rouge&quot;&gt;00100c17&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;00100d2e&lt;/code&gt;.
+So I redefine the values written to as &lt;code class=&quot;highlighter-rouge&quot;&gt;input_1&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;input_2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/aoc6-4.png&quot; alt=&quot;Redefine_1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We now know the expected types of inputs: &lt;code class=&quot;highlighter-rouge&quot;&gt;uint input_2&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;char *input_2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;As we know that the first input is a positive integer, we return and play around a bit:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ taras-pc tmp → ./lagrange_baby
+0
+noup
+λ taras-pc tmp → ./lagrange_baby
+1
+noup
+λ taras-pc tmp → ./lagrange_baby
+2
+noup
+λ taras-pc tmp → ./lagrange_baby
+3
+noup
+λ taras-pc tmp → ./lagrange_baby
+4
+noup
+λ taras-pc tmp → ./lagrange_baby
+5
+noup
+λ taras-pc tmp → ./lagrange_baby
+6
+a
+still noup
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Hmmm, so &lt;code class=&quot;highlighter-rouge&quot;&gt;6&lt;/code&gt; is an accepted first input. Good, but why?
+We will suppose that the function &lt;code class=&quot;highlighter-rouge&quot;&gt;isprime&lt;/code&gt; returns what its name says if the number given as input is prime.
+So if we look at the first part of the main function (I renamed some variables to make it more readable) we have the following flow&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;scanf(&amp;amp;io_input,&amp;amp;input_1);
+srand(input_1); // init rand with seed the input value
+var_1 = 0xd;    // 0xd = 13 in decimal
+do {
+    // this while loops var_1 from 13 untill it breaks
+    var_1_prime = isprime(var_1); // Check if the current var_1 is prime
+    if ((int)var_1_prime != 0) {
+        // if its prime we take its remainder mod 10 and check if its prime
+        var_1_prime = isprime((int)var_1 % 10);
+        if ((int)var_1_prime != 0) {
+            // if it is we take the integer division of var_1 by 10 and
+            // check if is divisble by 3
+            var_2 = (int)var_1 / 10;
+            // then this strange wtf variable comes up...
+            if (((int)var_2 % 3 == 0) &amp;amp;&amp;amp;
+                (wtf = (uint)((int)var_2 &amp;gt;&amp;gt; 0x1f) &amp;gt;&amp;gt; 0x1f, (int)var_2 % 3 == (var_2 + wtf &amp;amp; 1) - wtf))
+                break; // if this strange condition is satisfied we exit the loop
+        }
+    }
+    // var_1++
+    var_1 = var_1 + 1;
+} while( true );
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As I do not really understand this loop, I decided to implement a analogy of this in Python:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isprime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;var_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0xd&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;var_1_prime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isprime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var_1_prime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;var_1_prime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isprime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var_1_prime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;var_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;wtf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x1f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x1f&lt;/span&gt;
+
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wtf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wtf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;var_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When I run it I get this output&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ taras-pc tmp → python3 loop.py
+67 6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Nice! We know that &lt;code class=&quot;highlighter-rouge&quot;&gt;var_1=67&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;var_2=6&lt;/code&gt;. That’s where the initial &lt;code class=&quot;highlighter-rouge&quot;&gt;6&lt;/code&gt; we found came from.&lt;/p&gt;
+
+&lt;p&gt;Let’s take a look at the next condition&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;// checks if input_1 is 6
+if (var_2 == input_1) {
+    // input_2 will be 6 *char
+    input_2 = (char *)malloc((long)(int)input_1);
+    // read input_2
+    scanf(&amp;amp;DAT_00100ea0,input_2);
+    input_2_len = strlen(input_2);
+    // check if the input_2 is really 6 chars long
+    if (input_2_len == (long)(int)input_1) {
+        // init a var_3 to 0, which we will loop while
+        // its less than 6, i.e. var_3 = 0, 1, 2, 3, 4, 5 
+        var_3 = 0;
+        while (var_3 &amp;lt; (int)input_1) {
+            // pick var_3-th character of the input_2
+            char_i = input_2[(long)var_3];
+            // evaluate some random function
+            epic_function_output = epic_function(var_3 + 1);
+            // check if the current character of the input (in decimal form)
+            // is the same as the function return value
+            if ((int)char_i != (int)epic_function_output) {
+                puts(&quot;aaaaaaaaand stil noup&quot;);
+                free(input_2);
+                return_var = 1;
+                goto LAB_00100def;
+            }
+            var_3 = var_3 + 1;
+        }
+        printf(&quot;flag{\%s}\n&quot;,input_2);
+        free(input_2);
+        return_var = 0;
+    }
+    else {
+        // the message we got before
+        puts(&quot;still noup&quot;);
+        free(input_2);
+        return_var = 1;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hm, interesting. Let’s try something…&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ taras-pc tmp → ./lagrange_baby
+6
+123456
+aaaaaaaaand stil noup
+λ taras-pc tmp → ./lagrange_baby
+6
+12345
+still noup
+λ taras-pc tmp → ./lagrange_baby
+6
+1234567
+still noup
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Good. The expected &lt;code class=&quot;highlighter-rouge&quot;&gt;input_2&lt;/code&gt; length is really &lt;code class=&quot;highlighter-rouge&quot;&gt;6&lt;/code&gt; characters long. Let’s take a look at the &lt;code class=&quot;highlighter-rouge&quot;&gt;epic_function&lt;/code&gt; then. Doing some basic redefines to be more readable we have this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;ulong epic_function(int x)
+{
+  ulong v1;
+  ulong v2;
+  ulong v3;
+  ulong v4;
+  
+  // 0x3b9aca01 = 1000000001 in decimal
+  // but what does pow_mod do?
+  v1 = pow_mod(x,5,0x3b9aca01);
+  v2 = pow_mod(x,4,0x3b9aca01);
+  v3 = pow_mod(x,3,0x3b9aca01);
+  v4 = pow_mod(x,2,0x3b9aca01);
+  return v4 &amp;amp; 0xffffffff00000000 |
+         (ulong)(uint)(int)(((double)x * -7657.00000000) / 6.00000000 +
+                            ((double)(int)v4 * 10123.00000000) / 12.00000000 +
+                            ((double)(int)v3 * -5861.00000000) / 24.00000000 +
+                            ((double)(int)v2 * 389.00000000) / 12.00000000 +
+                            ((double)(int)v1 * -13.00000000) / 8.00000000 + 0.00000000 +
+                            713.00000000 + 0.50000000);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This function seems to do some strange calculations… Let’s take a look at &lt;code class=&quot;highlighter-rouge&quot;&gt;pow_mod&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;ulong pow_mod(int x, uint y, int z)
+{
+  uint v1;
+  int v2;
+  uint v3;
+  
+  v3 = 1;
+  v1 = y;
+  v2 = x;
+  while (v1 != 0) {
+    if ((v1 &amp;amp; 1) != 0) {
+      v3 = (int)(v2 * v3) % z;
+    }
+    v1 = (int)v1 &amp;gt;&amp;gt; 1;
+    v2 = (v2 * v2) % z;
+  }
+  return (ulong)v3;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hmm, I’m to lazy to understand this. Let’s try to run it!
+I created a C file with the &lt;code class=&quot;highlighter-rouge&quot;&gt;pow_mod&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;epic_function&lt;/code&gt; definitions and a simple loop like it does on the &lt;code class=&quot;highlighter-rouge&quot;&gt;lagrange_baby&lt;/code&gt; binary, from &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;5&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;#include &amp;lt;stdio.h&amp;gt;
+
+int pow_mod(int x, int y, int z)
+{
+  int v1;
+  int v2;
+  int v3;
+  
+  v3 = 1;
+  v1 = y;
+  v2 = x;
+  while (v1 != 0) {
+    if ((v1 &amp;amp; 1) != 0) {
+      v3 = (int)(v2 * v3) % z;
+    }
+    v1 = (int)v1 &amp;gt;&amp;gt; 1;
+    v2 = (v2 * v2) % z;
+  }
+  return (int)v3;
+}
+
+int epic_function(int x)
+{
+  int v1;
+  int v2;
+  int v3;
+  int v4;
+  
+  // 0x3b9aca01 = 1000000001 in decimal
+  // but what does pow_mod do?
+  v1 = pow_mod(x,5,0x3b9aca01);
+  v2 = pow_mod(x,4,0x3b9aca01);
+  v3 = pow_mod(x,3,0x3b9aca01);
+  v4 = pow_mod(x,2,0x3b9aca01);
+  return v4 &amp;amp; 0xffffffff00000000 |
+         (int)(int)(int)(((double)x * -7657.00000000) / 6.00000000 +
+                            ((double)(int)v4 * 10123.00000000) / 12.00000000 +
+                            ((double)(int)v3 * -5861.00000000) / 24.00000000 +
+                            ((double)(int)v2 * 389.00000000) / 12.00000000 +
+                            ((double)(int)v1 * -13.00000000) / 8.00000000 + 0.00000000 +
+                            713.00000000 + 0.50000000);
+}
+
+int main() {
+    for (int i = 0; i &amp;lt; 6; ++i)
+    {
+        printf(&quot;%d %d %c\n&quot;, i+1, epic_function((int)(i+1)), epic_function((int)(i+1)));
+    }
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that I changed all &lt;code class=&quot;highlighter-rouge&quot;&gt;uint&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;ulong&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt;. when I compile and execute this I get the following output:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ taras-pc tmp → gcc epic.c
+λ taras-pc tmp → ./a.out
+1 67 C
+2 48 0
+3 114 r
+4 111 o
+5 78 N
+6 52 4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Oh! This look like something. We got the string: &lt;code class=&quot;highlighter-rouge&quot;&gt;C0r0N4&lt;/code&gt;! Let’s try it as second input:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ taras-pc tmp → ./lagrange_baby
+6
+C0roN4
+flag&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;C0roN4&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Yes! We got it. Not that hard, right?&lt;/p&gt;
+
+&lt;h3 id=&quot;actual-c-code-for-the-binary&quot;&gt;Actual C code for the binary&lt;/h3&gt;
+
+&lt;p&gt;If any of you are interested in how I created this challenge, here is the C code that generated it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;time.h&amp;gt;
+
+#define TOO_BIG 1e+9+1
+
+int pow_mod(int a, int x, int n)
+{
+   int r = 1;
+
+   while (x)
+   {
+      if ((x &amp;amp; 1) == 1)
+         r = a * r % n;
+
+      x &amp;gt;&amp;gt;= 1;
+      a = a * a % n;
+   }
+
+   return r;
+}
+
+int epic_function(int x)
+{
+   double s = 0;
+
+   s += -13 * (double)pow_mod(x, 5, TOO_BIG) / 8;
+   s += 389 * (double)pow_mod(x, 4, TOO_BIG) / 12;
+   s += -5861 * (double)pow_mod(x, 3, TOO_BIG) / 24;
+   s += 10123 * (double)pow_mod(x, 2, TOO_BIG) / 12;
+   s += -7657 * (double)x / 6;
+   s += 713;
+
+   return (int)(s + 0.5);
+}
+
+int rand_between(int a, int b) { return a + (int)((double)(b - a + 1) * rand() / (TOO_BIG + 1.0)); }
+
+int isprime(int n)
+{
+   int k = 5;
+
+   if (n == 2 || n == 3)
+      return 1;
+   if (n &amp;lt;= 1 || !(n &amp;amp; 1))
+      return 0;
+
+   int s = 0;
+   for (int m = n - 1; !(m &amp;amp; 1); ++s, m &amp;gt;&amp;gt;= 1)
+      ;
+
+   int d = (n - 1) / (1 &amp;lt;&amp;lt; s);
+
+   for (int i = 0; i &amp;lt; k; ++i)
+   {
+      int a = rand_between(2, n - 2);
+      int x = pow_mod(a, d, n);
+
+      if (x == 1 || x == n - 1)
+         continue;
+
+      for (int r = 1; r &amp;lt;= s - 1; ++r)
+      {
+         x = pow_mod(x, 2, n);
+         if (x == 1)
+            return 0;
+         if (x == n - 1)
+            goto LOOP;
+      }
+
+      return 0;
+   LOOP:
+      continue;
+   }
+
+   return 1;
+}
+
+int main()
+{
+   int y;
+
+   scanf(&quot;\%d&quot;, &amp;amp;y);
+   srand(y);
+
+   for (int i = 13;; i++)
+   {
+      if (isprime(i) &amp;amp;&amp;amp; isprime(i % 10))
+      {
+         int tmp = i / 10;
+
+         if (!(tmp % 3) &amp;amp;&amp;amp; (tmp % 3 == tmp % 2))
+         {
+            if (tmp == y)
+               break;
+            else
+            {
+               printf(&quot;noup\n&quot;);
+               return 1;
+            }
+         }
+      }
+   }
+
+   char *x = (char *)malloc(y * sizeof(char));
+   scanf(&quot;\%s&quot;, x);
+
+   if (strlen(x) != y)
+   {
+      printf(&quot;still noup\n&quot;);
+      free(x);
+      return 1;
+   }
+
+   for (int i = 0; i &amp;lt; y; i++)
+   {
+      if ((int)x[i] != epic_function(i + 1))
+      {
+         printf(&quot;aaaaaaaaand stil noup\n&quot;);
+         free(x);
+         return 1;
+      }
+   }
+
+   printf(&quot;flag{\%s}\n&quot;, x);
+   free(x);
+
+   return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;</content><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><category term="random" /><category term="advent-of-corona" /><summary type="html">This post is about the day 6 problem of the Advent Of Corona challenge.</summary></entry><entry><title type="html">Hello world!</title><link href="http://localhost:4000/2019-10-22/hi" rel="alternate" type="text/html" title="Hello world!" /><published>2019-10-22T20:45:14+02:00</published><updated>2019-10-22T20:45:14+02:00</updated><id>http://localhost:4000/2019-10-22/hi</id><content type="html" xml:base="http://localhost:4000/2019-10-22/hi">&lt;p&gt;&lt;strong&gt;Hi!&lt;/strong&gt; This is my first post. I’m using &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; with &lt;a href=&quot;https://github.com/chesterhow/tale&quot;&gt;tale&lt;/a&gt;, a minamilist theme.&lt;/p&gt;</content><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><category term="random" /><summary type="html">Hi! This is my first post. I’m using Jekyll with tale, a minamilist theme.</summary></entry></feed>
