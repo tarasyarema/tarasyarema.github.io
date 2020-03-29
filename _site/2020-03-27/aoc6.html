@@ -159,20 +159,20 @@ noup
 
 <p>Pretty straight-forward.</p>
 
-<p><img src="/assets/img/aoc6-1.png" alt="Import" /></p>
+<p><img src="/assets/img/aoc6-1.PNG" alt="Import" /></p>
 
 <h4 id="analyze-it">Analyze it</h4>
 
 <p>Just analyze all.</p>
 
-<p><img src="/assets/img/aoc6-2.png" alt="Analyze" /></p>
+<p><img src="/assets/img/aoc6-2.PNG" alt="Analyze" /></p>
 
 <h4 id="reversing">Reversing</h4>
 
 <p>First of all, I look that the functions panel and search for the <code class="highlighter-rouge">main</code> function.
 When you click at it it shows up a <em>C-like</em> decompiled view of the function.</p>
 
-<p><img src="/assets/img/aoc6-3.png" alt="Main" /></p>
+<p><img src="/assets/img/aoc6-3.PNG" alt="Main" /></p>
 
 <p>One of the things I like about Ghidra is that it lets you redefine variable types and names. So you can change those definitions during the reversing and the flow is much easier to follow.</p>
 
@@ -180,7 +180,7 @@ When you click at it it shows up a <em>C-like</em> decompiled view of the functi
 I notice that there are two <code class="highlighter-rouge">scanf</code> in the main function: <code class="highlighter-rouge">00100c17</code> and <code class="highlighter-rouge">00100d2e</code>.
 So I redefine the values written to as <code class="highlighter-rouge">input_1</code> and <code class="highlighter-rouge">input_2</code>.</p>
 
-<p><img src="/assets/img/aoc6-4.png" alt="Redefine_1" /></p>
+<p><img src="/assets/img/aoc6-4.PNG" alt="Redefine_1" /></p>
 
 <p>We now know the expected types of inputs: <code class="highlighter-rouge">uint input_2</code> and <code class="highlighter-rouge">char *input_2</code>.</p>
 
@@ -594,6 +594,8 @@ int main()
 
 <div class="pagination">
   
+    <a href="/2020-03-27/aoc8" class="left arrow">&#8592;</a>
+  
   
     <a href="/2019-10-22/hi" class="right arrow">&#8594;</a>
   
@@ -605,7 +607,7 @@ int main()
 
     <footer>
   <span>
-    &copy; <time datetime="2020-03-27 15:20:33 +0100">2020</time> Taras Yarema.
+    &copy; <time datetime="2020-03-29 18:39:14 +0200">2020</time> Taras Yarema.
   </span>
 </footer>
 
