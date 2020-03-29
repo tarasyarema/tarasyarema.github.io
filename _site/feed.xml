@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://tarasyarema.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://tarasyarema.com/" rel="alternate" type="text/html" /><updated>2020-03-29T18:39:14+02:00</updated><id>https://tarasyarema.com/feed.xml</id><title type="html">tarasyarema</title><subtitle></subtitle><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><entry><title type="html">Advent Of Corona: Day 8</title><link href="https://tarasyarema.com/2020-03-27/aoc8" rel="alternate" type="text/html" title="Advent Of Corona: Day 8" /><published>2020-03-27T00:00:00+01:00</published><updated>2020-03-27T00:00:00+01:00</updated><id>https://tarasyarema.com/2020-03-27/aoc8</id><content type="html" xml:base="https://tarasyarema.com/2020-03-27/aoc8">&lt;p&gt;This post is about the &lt;a href=&quot;https://adventofcorona.hackersatupc.org/#/problem/8&quot;&gt;day 8 problem of the Advent Of Corona challenge&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://tarasyarema.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://tarasyarema.com/" rel="alternate" type="text/html" /><updated>2020-03-29T18:52:24+02:00</updated><id>https://tarasyarema.com/feed.xml</id><title type="html">tarasyarema</title><subtitle></subtitle><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><entry><title type="html">Advent Of Corona: Day 8</title><link href="https://tarasyarema.com/2020-03-27/aoc8" rel="alternate" type="text/html" title="Advent Of Corona: Day 8" /><published>2020-03-27T00:00:00+01:00</published><updated>2020-03-27T00:00:00+01:00</updated><id>https://tarasyarema.com/2020-03-27/aoc8</id><content type="html" xml:base="https://tarasyarema.com/2020-03-27/aoc8">&lt;p&gt;This post is about the &lt;a href=&quot;https://adventofcorona.hackersatupc.org/#/problem/8&quot;&gt;day 8 problem of the Advent Of Corona challenge&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-problem&quot;&gt;The problem&lt;/h2&gt;
 
-&lt;p&gt;Your are given 3 &lt;code class=&quot;highlighter-rouge&quot;&gt;TCP&lt;/code&gt; connections:&lt;/p&gt;
+&lt;p&gt;You are given 3 &lt;code class=&quot;highlighter-rouge&quot;&gt;TCP&lt;/code&gt; connections:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;A test one: &lt;code class=&quot;highlighter-rouge&quot;&gt;68.183.210.250:32779&lt;/code&gt;&lt;/li&gt;
@@ -15,7 +15,7 @@
 &lt;h2 id=&quot;the-solution&quot;&gt;The solution&lt;/h2&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Disclaimer: I won’t give the flags here. Try to solve it by your own, or run the soltuion script &lt;strong&gt;after&lt;/strong&gt; understanding it if you want to get the flags. It’s up to you in the end…&lt;/p&gt;
+  &lt;p&gt;Disclaimer: I won’t give the flags here. Try to solve it by your own, or run the solution script &lt;strong&gt;after&lt;/strong&gt; understanding it if you want to get the flags. It’s up to you in the end…&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;If you play with the test connection, for example running it via &lt;code class=&quot;highlighter-rouge&quot;&gt;telnet&lt;/code&gt;:&lt;/p&gt;
@@ -25,9 +25,9 @@
 
 &lt;p&gt;You see a tic-tao-toe game. If you win the bot you will get a flag in the format &lt;code class=&quot;highlighter-rouge&quot;&gt;flag{xxx}&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;As the problem states, there’s a timeout of 2s and 3s for the first and second phase, respictevly.&lt;/p&gt;
+&lt;p&gt;As the problem states, there’s a timeout of 2s and 3s for the first and second phase, respectively.&lt;/p&gt;
 
-&lt;p&gt;My approach is to try to solve it via a random algorithm, i.e. just pick a random empty cell everytime.&lt;/p&gt;
+&lt;p&gt;My approach is to try to solve it via a random algorithm, i.e. just pick a random empty cell every time.&lt;/p&gt;
 
 &lt;p&gt;Here is the code:&lt;/p&gt;
 
@@ -81,7 +81,7 @@
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;You may have to run it a few times, if it does not solve it in the first run.&lt;/p&gt;
+&lt;p&gt;You may have to run it a few times if it does not solve it in the first run.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-actual-code&quot;&gt;The actual code&lt;/h2&gt;
 
