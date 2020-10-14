@@ -1,0 +1,93 @@
+I"�&<p>This post is about the <a href="https://adventofcorona.hackersatupc.org/#/problem/8">day 8 problem of the Advent Of Corona challenge</a>.</p>
+
+<h2 id="the-problem">The problem</h2>
+
+<p>You are given 3 <code class="language-plaintext highlighter-rouge">TCP</code> connections:</p>
+
+<ul>
+  <li>A test one: <code class="language-plaintext highlighter-rouge">68.183.210.250:32779</code></li>
+  <li>Phase 1: <code class="language-plaintext highlighter-rouge">68.183.210.250:32780</code></li>
+  <li>Phase 2: <code class="language-plaintext highlighter-rouge">68.183.210.250:32781</code></li>
+</ul>
+
+<p>Your goal is to get a flag, but… which flag?</p>
+
+<h2 id="the-solution">The solution</h2>
+
+<blockquote>
+  <p>Disclaimer: I won’t give the flags here. Try to solve it by your own, or run the solution script <strong>after</strong> understanding it if you want to get the flags. It’s up to you in the end…</p>
+</blockquote>
+
+<p>If you play with the test connection, for example running it via <code class="language-plaintext highlighter-rouge">telnet</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telnet 68.183.210.250 32779
+</code></pre></div></div>
+
+<p>You see a tic-tao-toe game. If you win the bot you will get a flag in the format <code class="language-plaintext highlighter-rouge">flag{xxx}</code>.</p>
+
+<p>As the problem states, there’s a timeout of 2s and 3s for the first and second phase, respectively.</p>
+
+<p>My approach is to try to solve it via a random algorithm, i.e. just pick a random empty cell every time.</p>
+
+<p>Here is the code:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">telnetlib</span> <span class="kn">import</span> <span class="n">Telnet</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">connections</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s">"test"</span><span class="p">,</span> <span class="s">"68.183.210.250"</span><span class="p">,</span> <span class="mi">32779</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">"phase_0"</span><span class="p">,</span> <span class="s">"68.183.210.250"</span><span class="p">,</span> <span class="mi">32780</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">"phase_1"</span><span class="p">,</span> <span class="s">"68.183.210.250"</span><span class="p">,</span> <span class="mi">32781</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
+    <span class="n">tn</span> <span class="o">=</span> <span class="n">Telnet</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+    <span class="n">tn</span><span class="p">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"give me a name: "</span><span class="p">))</span>
+    <span class="n">tn</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"taras"</span><span class="p">))</span>
+    <span class="n">tn</span><span class="p">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">))</span>
+
+    <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">d_tmp</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">tn</span><span class="p">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">))</span>
+
+                <span class="k">except</span> <span class="nb">Exception</span><span class="p">:</span>
+                    <span class="n">flag</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">d_tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+
+                    <span class="k">print</span><span class="p">(</span><span class="s">f"</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">flag</span><span class="si">}</span><span class="s"> - </span><span class="si">{</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">tt</span><span class="p">:</span><span class="mf">2.4</span><span class="n">f</span><span class="si">}</span><span class="s"> s."</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"end"</span><span class="p">)</span>
+
+                <span class="n">d_tmp</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+                <span class="n">d</span> <span class="o">+=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">tmp</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="s">"|"</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            
+            <span class="n">d</span> <span class="o">=</span> <span class="p">[</span> <span class="n">dd</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span> <span class="k">for</span> <span class="n">dd</span> <span class="ow">in</span> <span class="n">d</span> <span class="p">]</span>
+            <span class="n">tn</span><span class="p">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"give me a position (comma separated): "</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">""</span><span class="p">:</span>
+                    <span class="n">ss</span> <span class="o">=</span> <span class="s">f"</span><span class="si">{</span><span class="n">i</span><span class="o">//</span><span class="n">s</span><span class="si">}</span><span class="s">,</span><span class="si">{</span><span class="n">i</span><span class="o">%</span><span class="n">s</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span>
+                    <span class="n">tn</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">ss</span><span class="p">))</span>
+                    <span class="k">break</span>
+        
+        <span class="k">except</span> <span class="nb">Exception</span><span class="p">:</span>
+            <span class="k">break</span>
+
+</code></pre></div></div>
+
+<p>You may have to run it a few times if it does not solve it in the first run.</p>
+
+<h2 id="the-actual-code">The actual code</h2>
+
+<blockquote>
+  <p>It was written in Go and deployed via Docker :3</p>
+</blockquote>
+
+<p>If you are interested in how I created this challenge <a href="https://github.com/tarasyarema/sockit">here</a> you can have a look!</p>
+:ET

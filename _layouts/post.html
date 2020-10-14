@@ -32,5 +32,11 @@ layout: default
     <a href="{{ page.previous.url | prepend: site.baseurl }}" class="right arrow">&#8594;</a>
   {% endif %}
 
+  <p>
+    {% for tag in page.tags %}
+    <b>#{{ tag }}</b>
+    {% endfor %}
+  </p>
+
   <a href="#" class="top">Top</a>
 </div>

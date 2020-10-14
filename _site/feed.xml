@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://tarasyarema.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://tarasyarema.com/" rel="alternate" type="text/html" /><updated>2020-03-29T18:52:24+02:00</updated><id>https://tarasyarema.com/feed.xml</id><title type="html">tarasyarema</title><subtitle></subtitle><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><entry><title type="html">Advent Of Corona: Day 8</title><link href="https://tarasyarema.com/2020-03-27/aoc8" rel="alternate" type="text/html" title="Advent Of Corona: Day 8" /><published>2020-03-27T00:00:00+01:00</published><updated>2020-03-27T00:00:00+01:00</updated><id>https://tarasyarema.com/2020-03-27/aoc8</id><content type="html" xml:base="https://tarasyarema.com/2020-03-27/aoc8">&lt;p&gt;This post is about the &lt;a href=&quot;https://adventofcorona.hackersatupc.org/#/problem/8&quot;&gt;day 8 problem of the Advent Of Corona challenge&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-10-14T13:29:52+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">tarasyarema</title><subtitle></subtitle><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><entry><title type="html">Advent Of Corona: Day 8</title><link href="http://localhost:4000/2020-03-29/aoc8" rel="alternate" type="text/html" title="Advent Of Corona: Day 8" /><published>2020-03-29T12:00:00+02:00</published><updated>2020-03-29T12:00:00+02:00</updated><id>http://localhost:4000/2020-03-29/aoc8</id><content type="html" xml:base="http://localhost:4000/2020-03-29/aoc8">&lt;p&gt;This post is about the &lt;a href=&quot;https://adventofcorona.hackersatupc.org/#/problem/8&quot;&gt;day 8 problem of the Advent Of Corona challenge&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-problem&quot;&gt;The problem&lt;/h2&gt;
 
-&lt;p&gt;You are given 3 &lt;code class=&quot;highlighter-rouge&quot;&gt;TCP&lt;/code&gt; connections:&lt;/p&gt;
+&lt;p&gt;You are given 3 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TCP&lt;/code&gt; connections:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;A test one: &lt;code class=&quot;highlighter-rouge&quot;&gt;68.183.210.250:32779&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Phase 1: &lt;code class=&quot;highlighter-rouge&quot;&gt;68.183.210.250:32780&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Phase 2: &lt;code class=&quot;highlighter-rouge&quot;&gt;68.183.210.250:32781&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;A test one: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;68.183.210.250:32779&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Phase 1: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;68.183.210.250:32780&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Phase 2: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;68.183.210.250:32781&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Your goal is to get a flag, but… which flag?&lt;/p&gt;
@@ -18,12 +18,12 @@
   &lt;p&gt;Disclaimer: I won’t give the flags here. Try to solve it by your own, or run the solution script &lt;strong&gt;after&lt;/strong&gt; understanding it if you want to get the flags. It’s up to you in the end…&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;If you play with the test connection, for example running it via &lt;code class=&quot;highlighter-rouge&quot;&gt;telnet&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;If you play with the test connection, for example running it via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;telnet&lt;/code&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;telnet 68.183.210.250 32779
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;You see a tic-tao-toe game. If you win the bot you will get a flag in the format &lt;code class=&quot;highlighter-rouge&quot;&gt;flag{xxx}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You see a tic-tao-toe game. If you win the bot you will get a flag in the format &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flag{xxx}&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;As the problem states, there’s a timeout of 2s and 3s for the first and second phase, respectively.&lt;/p&gt;
 
@@ -43,9 +43,9 @@
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;connections&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Telnet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-    &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_until&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;give me a name: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;taras&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_until&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_until&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;give me a name: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;taras&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_until&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
     &lt;span class=&quot;n&quot;&gt;tt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 
@@ -56,24 +56,24 @@
 
             &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
                 &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_until&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_until&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
                 &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d_tmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d_tmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-                    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{t}: {flag} - {time()-tt:2.4f} s.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;f&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; - &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.4&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; s.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
                     &lt;span class=&quot;k&quot;&gt;raise&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;end&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-                &lt;span class=&quot;n&quot;&gt;d_tmp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;|&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;d_tmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;|&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
             
-            &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dd&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_until&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;give me a position (comma separated): &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dd&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_until&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;give me a position (comma separated): &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
             &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
                 &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{i//s},{i&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;f&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;tn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
                     &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
         
         &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
@@ -89,15 +89,15 @@
   &lt;p&gt;It was written in Go and deployed via Docker :3&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;If you are interested in how I created this challenge &lt;a href=&quot;https://github.com/tarasyarema/sockit&quot;&gt;here&lt;/a&gt; you can have a look!&lt;/p&gt;</content><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><category term="random" /><category term="advent-of-corona" /><summary type="html">This post is about the day 8 problem of the Advent Of Corona challenge.</summary></entry><entry><title type="html">Advent Of Corona: Day 6</title><link href="https://tarasyarema.com/2020-03-27/aoc6" rel="alternate" type="text/html" title="Advent Of Corona: Day 6" /><published>2020-03-27T00:00:00+01:00</published><updated>2020-03-27T00:00:00+01:00</updated><id>https://tarasyarema.com/2020-03-27/aoc6</id><content type="html" xml:base="https://tarasyarema.com/2020-03-27/aoc6">&lt;p&gt;This post is about the &lt;a href=&quot;https://adventofcorona.hackersatupc.org/#/problem/6&quot;&gt;day 6 problem of the Advent Of Corona challenge&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you are interested in how I created this challenge &lt;a href=&quot;https://github.com/tarasyarema/sockit&quot;&gt;here&lt;/a&gt; you can have a look!&lt;/p&gt;</content><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><category term="programming" /><category term="net" /><category term="advent-of-corona" /><summary type="html">This post is about the day 8 problem of the Advent Of Corona challenge.</summary></entry><entry><title type="html">Advent Of Corona: Day 6</title><link href="http://localhost:4000/2020-03-27/aoc6" rel="alternate" type="text/html" title="Advent Of Corona: Day 6" /><published>2020-03-27T11:00:00+01:00</published><updated>2020-03-27T11:00:00+01:00</updated><id>http://localhost:4000/2020-03-27/aoc6</id><content type="html" xml:base="http://localhost:4000/2020-03-27/aoc6">&lt;p&gt;This post is about the &lt;a href=&quot;https://adventofcorona.hackersatupc.org/#/problem/6&quot;&gt;day 6 problem of the Advent Of Corona challenge&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-problem&quot;&gt;The problem&lt;/h2&gt;
 
-&lt;p&gt;You are given a binary named &lt;code class=&quot;highlighter-rouge&quot;&gt;lagrange_baby&lt;/code&gt;. That’s all.&lt;/p&gt;
+&lt;p&gt;You are given a binary named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lagrange_baby&lt;/code&gt;. That’s all.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-solution&quot;&gt;The solution&lt;/h2&gt;
 
-&lt;p&gt;The first thing to do when you get a binary in a &lt;em&gt;CTF-like&lt;/em&gt; challenge like this is taking a look at what bash commands like &lt;code class=&quot;highlighter-rouge&quot;&gt;file&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;strings&lt;/code&gt; output you.&lt;/p&gt;
+&lt;p&gt;The first thing to do when you get a binary in a &lt;em&gt;CTF-like&lt;/em&gt; challenge like this is taking a look at what bash commands like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strings&lt;/code&gt; output you.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ taras-pc tmp → file lagrange_baby
 lagrange_baby: ELF 64-bit LSB shared object, x86-64, version 1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;SYSV&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, 
@@ -142,8 +142,8 @@ flag&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;se&quot;&
 &lt;p&gt;From these outputs we know the following things:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;The binary is Linux &lt;code class=&quot;highlighter-rouge&quot;&gt;x64&lt;/code&gt; executable.&lt;/li&gt;
-  &lt;li&gt;There are some interesting strings: &lt;code class=&quot;highlighter-rouge&quot;&gt;noup&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;still noup&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;aaaaaaaaand stil noup&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;flag{\%s}&lt;/code&gt;.
+  &lt;li&gt;The binary is Linux &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x64&lt;/code&gt; executable.&lt;/li&gt;
+  &lt;li&gt;There are some interesting strings: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noup&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;still noup&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aaaaaaaaand stil noup&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flag{\%s}&lt;/code&gt;.
   There is nothing similar to a flag inside it, so I can suppose that it’s generated in execution time.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -184,20 +184,20 @@ noup
 
 &lt;h4 id=&quot;reversing&quot;&gt;Reversing&lt;/h4&gt;
 
-&lt;p&gt;First of all, I look that the functions panel and search for the &lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt; function.
+&lt;p&gt;First of all, I look that the functions panel and search for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt; function.
 When you click at it it shows up a &lt;em&gt;C-like&lt;/em&gt; decompiled view of the function.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/aoc6-3.PNG&quot; alt=&quot;Main&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;One of the things I like about Ghidra is that it lets you redefine variable types and names. So you can change those definitions during the reversing and the flow is much easier to follow.&lt;/p&gt;
 
-&lt;p&gt;The first thing I do is redefine the main function to be &lt;code class=&quot;highlighter-rouge&quot;&gt;int main (void)&lt;/code&gt; and the &lt;code class=&quot;highlighter-rouge&quot;&gt;__isoc99_scanf&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;scanf&lt;/code&gt;.
-I notice that there are two &lt;code class=&quot;highlighter-rouge&quot;&gt;scanf&lt;/code&gt; in the main function: &lt;code class=&quot;highlighter-rouge&quot;&gt;00100c17&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;00100d2e&lt;/code&gt;.
-So I redefine the values written to as &lt;code class=&quot;highlighter-rouge&quot;&gt;input_1&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;input_2&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The first thing I do is redefine the main function to be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int main (void)&lt;/code&gt; and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__isoc99_scanf&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scanf&lt;/code&gt;.
+I notice that there are two &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scanf&lt;/code&gt; in the main function: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;00100c17&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;00100d2e&lt;/code&gt;.
+So I redefine the values written to as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;input_1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;input_2&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/aoc6-4.PNG&quot; alt=&quot;Redefine_1&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;We now know the expected types of inputs: &lt;code class=&quot;highlighter-rouge&quot;&gt;uint input_2&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;char *input_2&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We now know the expected types of inputs: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;uint input_2&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char *input_2&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;As we know that the first input is a positive integer, we return and play around a bit:&lt;/p&gt;
 
@@ -225,8 +225,8 @@ a
 still noup
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Hmmm, so &lt;code class=&quot;highlighter-rouge&quot;&gt;6&lt;/code&gt; is an accepted first input. Good, but why?
-We will suppose that the function &lt;code class=&quot;highlighter-rouge&quot;&gt;isprime&lt;/code&gt; returns what its name says if the number given as input is prime.
+&lt;p&gt;Hmmm, so &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;6&lt;/code&gt; is an accepted first input. Good, but why?
+We will suppose that the function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;isprime&lt;/code&gt; returns what its name says if the number given as input is prime.
 So if we look at the first part of the main function (I renamed some variables to make it more readable) we have the following flow&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;scanf(&amp;amp;io_input,&amp;amp;input_1);
@@ -284,7 +284,7 @@ do {
 67 6
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Nice! We know that &lt;code class=&quot;highlighter-rouge&quot;&gt;var_1=67&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;var_2=6&lt;/code&gt;. That’s where the initial &lt;code class=&quot;highlighter-rouge&quot;&gt;6&lt;/code&gt; we found came from.&lt;/p&gt;
+&lt;p&gt;Nice! We know that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;var_1=67&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;var_2=6&lt;/code&gt;. That’s where the initial &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;6&lt;/code&gt; we found came from.&lt;/p&gt;
 
 &lt;p&gt;Let’s take a look at the next condition&lt;/p&gt;
 
@@ -344,7 +344,7 @@ still noup
 still noup
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Good. The expected &lt;code class=&quot;highlighter-rouge&quot;&gt;input_2&lt;/code&gt; length is really &lt;code class=&quot;highlighter-rouge&quot;&gt;6&lt;/code&gt; characters long. Let’s take a look at the &lt;code class=&quot;highlighter-rouge&quot;&gt;epic_function&lt;/code&gt; then. Doing some basic redefines to be more readable we have this&lt;/p&gt;
+&lt;p&gt;Good. The expected &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;input_2&lt;/code&gt; length is really &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;6&lt;/code&gt; characters long. Let’s take a look at the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;epic_function&lt;/code&gt; then. Doing some basic redefines to be more readable we have this&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;ulong epic_function(int x)
 {
@@ -369,7 +369,7 @@ still noup
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This function seems to do some strange calculations… Let’s take a look at &lt;code class=&quot;highlighter-rouge&quot;&gt;pow_mod&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This function seems to do some strange calculations… Let’s take a look at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pow_mod&lt;/code&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;ulong pow_mod(int x, uint y, int z)
 {
@@ -392,7 +392,7 @@ still noup
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Hmm, I’m to lazy to understand this. Let’s try to run it!
-I created a C file with the &lt;code class=&quot;highlighter-rouge&quot;&gt;pow_mod&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;epic_function&lt;/code&gt; definitions and a simple loop like it does on the &lt;code class=&quot;highlighter-rouge&quot;&gt;lagrange_baby&lt;/code&gt; binary, from &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;5&lt;/code&gt;.&lt;/p&gt;
+I created a C file with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pow_mod&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;epic_function&lt;/code&gt; definitions and a simple loop like it does on the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lagrange_baby&lt;/code&gt; binary, from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;5&lt;/code&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;#include &amp;lt;stdio.h&amp;gt;
 
@@ -446,7 +446,7 @@ int main() {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Note that I changed all &lt;code class=&quot;highlighter-rouge&quot;&gt;uint&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;ulong&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt;. when I compile and execute this I get the following output:&lt;/p&gt;
+&lt;p&gt;Note that I changed all &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;uint&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ulong&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt;. when I compile and execute this I get the following output:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ taras-pc tmp → gcc epic.c
 λ taras-pc tmp → ./a.out
@@ -458,7 +458,7 @@ int main() {
 6 52 4
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Oh! This look like something. We got the string: &lt;code class=&quot;highlighter-rouge&quot;&gt;C0r0N4&lt;/code&gt;! Let’s try it as second input:&lt;/p&gt;
+&lt;p&gt;Oh! This look like something. We got the string: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C0r0N4&lt;/code&gt;! Let’s try it as second input:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;λ taras-pc tmp → ./lagrange_baby
 6
@@ -602,4 +602,4 @@ int main()
 
    return 0;
 }
-&lt;/code&gt;&lt;/pre&gt;</content><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><category term="random" /><category term="advent-of-corona" /><summary type="html">This post is about the day 6 problem of the Advent Of Corona challenge.</summary></entry><entry><title type="html">Hello world!</title><link href="https://tarasyarema.com/2019-10-22/hi" rel="alternate" type="text/html" title="Hello world!" /><published>2019-10-22T20:45:14+02:00</published><updated>2019-10-22T20:45:14+02:00</updated><id>https://tarasyarema.com/2019-10-22/hi</id><content type="html" xml:base="https://tarasyarema.com/2019-10-22/hi">&lt;p&gt;&lt;strong&gt;Hi!&lt;/strong&gt; This is my first post. I’m using &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; with &lt;a href=&quot;https://github.com/chesterhow/tale&quot;&gt;tale&lt;/a&gt;, a minamilist theme.&lt;/p&gt;</content><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><category term="random" /><summary type="html">Hi! This is my first post. I’m using Jekyll with tale, a minamilist theme.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;</content><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><category term="programming" /><category term="reversing" /><category term="advent-of-corona" /><summary type="html">This post is about the day 6 problem of the Advent Of Corona challenge.</summary></entry></feed>

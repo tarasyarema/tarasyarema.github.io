@@ -7,19 +7,19 @@
 
   <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Advent Of Corona: Day 8 | tarasyarema</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v4.1.1" />
 <meta property="og:title" content="Advent Of Corona: Day 8" />
 <meta name="author" content="Taras Yarema" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="This post is about the day 8 problem of the Advent Of Corona challenge." />
 <meta property="og:description" content="This post is about the day 8 problem of the Advent Of Corona challenge." />
-<link rel="canonical" href="https://tarasyarema.com/2020-03-27/aoc8" />
-<meta property="og:url" content="https://tarasyarema.com/2020-03-27/aoc8" />
+<link rel="canonical" href="http://localhost:4000/2020-03-29/aoc8" />
+<meta property="og:url" content="http://localhost:4000/2020-03-29/aoc8" />
 <meta property="og:site_name" content="tarasyarema" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-03-27T00:00:00+01:00" />
+<meta property="article:published_time" content="2020-03-29T12:00:00+02:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"Advent Of Corona: Day 8","mainEntityOfPage":{"@type":"WebPage","@id":"https://tarasyarema.com/2020-03-27/aoc8"},"datePublished":"2020-03-27T00:00:00+01:00","url":"https://tarasyarema.com/2020-03-27/aoc8","author":{"@type":"Person","name":"Taras Yarema"},"description":"This post is about the day 8 problem of the Advent Of Corona challenge.","dateModified":"2020-03-27T00:00:00+01:00","@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Taras Yarema"},"headline":"Advent Of Corona: Day 8","dateModified":"2020-03-29T12:00:00+02:00","datePublished":"2020-03-29T12:00:00+02:00","description":"This post is about the day 8 problem of the Advent Of Corona challenge.","url":"http://localhost:4000/2020-03-29/aoc8","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020-03-29/aoc8"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -33,7 +33,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
 
   <!-- RSS -->
-  <link type="application/atom+xml" rel="alternate" href="https://tarasyarema.com/feed.xml" title="tarasyarema" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="tarasyarema" />
 
   <!-- Google Analytics-->
   
@@ -67,7 +67,7 @@
 
     
       <br>
-      <span>on&nbsp;</span><time datetime="2020-03-27 00:00:00 +0100">March 27, 2020</time>
+      <span>on&nbsp;</span><time datetime="2020-03-29 12:00:00 +0200">March 29, 2020</time>
     
   </div>
 
@@ -78,12 +78,12 @@
 
 <h2 id="the-problem">The problem</h2>
 
-<p>You are given 3 <code class="highlighter-rouge">TCP</code> connections:</p>
+<p>You are given 3 <code class="language-plaintext highlighter-rouge">TCP</code> connections:</p>
 
 <ul>
-  <li>A test one: <code class="highlighter-rouge">68.183.210.250:32779</code></li>
-  <li>Phase 1: <code class="highlighter-rouge">68.183.210.250:32780</code></li>
-  <li>Phase 2: <code class="highlighter-rouge">68.183.210.250:32781</code></li>
+  <li>A test one: <code class="language-plaintext highlighter-rouge">68.183.210.250:32779</code></li>
+  <li>Phase 1: <code class="language-plaintext highlighter-rouge">68.183.210.250:32780</code></li>
+  <li>Phase 2: <code class="language-plaintext highlighter-rouge">68.183.210.250:32781</code></li>
 </ul>
 
 <p>Your goal is to get a flag, but… which flag?</p>
@@ -94,12 +94,12 @@
   <p>Disclaimer: I won’t give the flags here. Try to solve it by your own, or run the solution script <strong>after</strong> understanding it if you want to get the flags. It’s up to you in the end…</p>
 </blockquote>
 
-<p>If you play with the test connection, for example running it via <code class="highlighter-rouge">telnet</code>:</p>
+<p>If you play with the test connection, for example running it via <code class="language-plaintext highlighter-rouge">telnet</code>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telnet 68.183.210.250 32779
 </code></pre></div></div>
 
-<p>You see a tic-tao-toe game. If you win the bot you will get a flag in the format <code class="highlighter-rouge">flag{xxx}</code>.</p>
+<p>You see a tic-tao-toe game. If you win the bot you will get a flag in the format <code class="language-plaintext highlighter-rouge">flag{xxx}</code>.</p>
 
 <p>As the problem states, there’s a timeout of 2s and 3s for the first and second phase, respectively.</p>
 
@@ -119,9 +119,9 @@
 <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
     <span class="n">tn</span> <span class="o">=</span> <span class="n">Telnet</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 
-    <span class="n">tn</span><span class="o">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"give me a name: "</span><span class="p">))</span>
-    <span class="n">tn</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"taras"</span><span class="p">))</span>
-    <span class="n">tn</span><span class="o">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">))</span>
+    <span class="n">tn</span><span class="p">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"give me a name: "</span><span class="p">))</span>
+    <span class="n">tn</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"taras"</span><span class="p">))</span>
+    <span class="n">tn</span><span class="p">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">))</span>
 
     <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 
@@ -132,24 +132,24 @@
 
             <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">tn</span><span class="o">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">))</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">tn</span><span class="p">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">))</span>
 
                 <span class="k">except</span> <span class="nb">Exception</span><span class="p">:</span>
-                    <span class="n">flag</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">d_tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+                    <span class="n">flag</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">d_tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
 
-                    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"{t}: {flag} - {time()-tt:2.4f} s."</span><span class="p">)</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">f"</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">flag</span><span class="si">}</span><span class="s"> - </span><span class="si">{</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">tt</span><span class="p">:</span><span class="mf">2.4</span><span class="n">f</span><span class="si">}</span><span class="s"> s."</span><span class="p">)</span>
                     <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"end"</span><span class="p">)</span>
 
-                <span class="n">d_tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
-                <span class="n">d</span> <span class="o">+=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">"|"</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">d_tmp</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+                <span class="n">d</span> <span class="o">+=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">tmp</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="s">"|"</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             
-            <span class="n">d</span> <span class="o">=</span> <span class="p">[</span> <span class="n">dd</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span> <span class="k">for</span> <span class="n">dd</span> <span class="ow">in</span> <span class="n">d</span> <span class="p">]</span>
-            <span class="n">tn</span><span class="o">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"give me a position (comma separated): "</span><span class="p">))</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">[</span> <span class="n">dd</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span> <span class="k">for</span> <span class="n">dd</span> <span class="ow">in</span> <span class="n">d</span> <span class="p">]</span>
+            <span class="n">tn</span><span class="p">.</span><span class="n">read_until</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"give me a position (comma separated): "</span><span class="p">))</span>
 
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">""</span><span class="p">:</span>
-                    <span class="n">ss</span> <span class="o">=</span> <span class="n">f</span><span class="s">"{i//s},{i</span><span class="si">%</span><span class="s">s}</span><span class="se">\n</span><span class="s">"</span>
-                    <span class="n">tn</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">ss</span><span class="p">))</span>
+                    <span class="n">ss</span> <span class="o">=</span> <span class="s">f"</span><span class="si">{</span><span class="n">i</span><span class="o">//</span><span class="n">s</span><span class="si">}</span><span class="s">,</span><span class="si">{</span><span class="n">i</span><span class="o">%</span><span class="n">s</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span>
+                    <span class="n">tn</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">ss</span><span class="p">))</span>
                     <span class="k">break</span>
         
         <span class="k">except</span> <span class="nb">Exception</span><span class="p">:</span>
@@ -176,6 +176,14 @@
     <a href="/2020-03-27/aoc6" class="right arrow">&#8594;</a>
   
 
+  <p>
+    
+    <b>#net</b>
+    
+    <b>#advent-of-corona</b>
+    
+  </p>
+
   <a href="#" class="top">Top</a>
 </div>
 
@@ -183,7 +191,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2020-03-29 18:52:24 +0200">2020</time> Taras Yarema.
+    &copy; <time datetime="2020-10-14 13:29:52 +0200">2020</time> Taras Yarema.
   </span>
 </footer>
 

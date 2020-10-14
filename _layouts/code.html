@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<div class="post">
+  <h3 class="post-title-code">{{ page.title }}</h3>
+
+  {{ content }}
+
+</div>
+
+<div class="pagination">
+  <p>
+    {% for tag in page.tags %}
+    <b>#{{ tag[0] }}</b>
+    {% endfor %}
+  </p>
+</div>
