@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Why using pointers is important | tarasyarema</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Why using pointers is important" />
+<meta name="author" content="Taras Yarema" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction" />
+<meta property="og:description" content="Introduction" />
+<link rel="canonical" href="http://localhost:4000/2021-03-01/stripe-drama" />
+<meta property="og:url" content="http://localhost:4000/2021-03-01/stripe-drama" />
+<meta property="og:site_name" content="tarasyarema" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-01T11:00:00+01:00" />
+<script type="application/ld+json">
+{"headline":"Why using pointers is important","dateModified":"2021-03-01T11:00:00+01:00","datePublished":"2021-03-01T11:00:00+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021-03-01/stripe-drama"},"author":{"@type":"Person","name":"Taras Yarema"},"description":"Introduction","url":"http://localhost:4000/2021-03-01/stripe-drama","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="tarasyarema" />
+
+  <!-- Analytics-->
+  <script async defer data-domain="tarasyarema.com" src="https://plausible.io/js/plausible.js"></script>
+
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">tarasyarema</h2>
+    </a>
+    <ul>
+      <li><a href="/assets/files/cv.pdf" target="_blank">CV</a></li>
+      <li><a href="https://github.com/tarasyarema/" target="_blank">Github</a></li>
+      <!-- <li><a href="/about">About</a></li> -->
+      <li><a href="/">Posts</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Taras Yarema
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2021-03-01 11:00:00 +0100">March 01, 2021</time>
+    
+  </div>
+
+  <h1 class="post-title">Why using pointers is important</h1>
+  <div class="post-line"></div>
+
+  <h2 id="introduction">Introduction</h2>
+
+<p>Lately at <a href="https://capchase.com">Capchase</a> we’ve been working with the <a href="https://stripe.com/docs/api">Stripe API</a>.
+The use case can be easily simplified: we need to keep some client data on
+our side so that we can operate with it easier than fetching it every time.
+For this purpose we use Go, and with it comes all the marshaling and
+un-marshaling that we need to handle when working with an API.</p>
+
+<p>Good to us, Stripe offers a <a href="">Go handy package</a> to work with the API without having
+to handle all the calls manually.
+To illustrate this, let’s consider that we want to get a specific coupon, for that
+we could code the following function</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">(</span>
+    <span class="s">"github.com/stripe/stripe-go"</span>
+    <span class="s">"github.com/stripe/stripe-go/coupon"</span>
+<span class="p">)</span>
+
+<span class="c">// We consider that the initial APi key setup has been done</span>
+<span class="c">// stripe.Key = "your_stripe_api_key"</span>
+
+<span class="c">// GetCoupon returns the Stripe coupon for the given id</span>
+<span class="k">func</span> <span class="n">GetCoupon</span><span class="p">(</span><span class="n">id</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="n">stripe</span><span class="o">.</span><span class="n">Coupon</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c">// Set wanted parameters...</span>
+    <span class="n">params</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">stripe</span><span class="o">.</span><span class="n">CouponParams</span><span class="p">{}</span>
+    <span class="k">return</span> <span class="n">coupon</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now, whenever we call <code class="language-plaintext highlighter-rouge">cp, err := GetCoupon(someID)</code> we will get a Stripe coupon
+object <code class="language-plaintext highlighter-rouge">cp</code>. Now, let’s have a look at the <a href="https://pkg.go.dev/github.com/stripe/stripe-go/v72#Coupon">definition of this struct</a>:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Coupon is the resource representing a Stripe coupon.</span>
+<span class="c">// For more details see https://stripe.com/docs/api#coupons.</span>
+<span class="k">type</span> <span class="n">Coupon</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">APIResource</span>
+
+    <span class="c">// Primitive fields</span>
+    <span class="n">AmountOff</span>        <span class="kt">int64</span>             <span class="s">`json:"amount_off"`</span>
+    <span class="n">Created</span>          <span class="kt">int64</span>             <span class="s">`json:"created"`</span>
+    <span class="n">Deleted</span>          <span class="kt">bool</span>              <span class="s">`json:"deleted"`</span>
+    <span class="n">DurationInMonths</span> <span class="kt">int64</span>             <span class="s">`json:"duration_in_months"`</span>
+    <span class="n">ID</span>               <span class="kt">string</span>            <span class="s">`json:"id"`</span>
+    <span class="n">Livemode</span>         <span class="kt">bool</span>              <span class="s">`json:"livemode"`</span>
+    <span class="n">MaxRedemptions</span>   <span class="kt">int64</span>             <span class="s">`json:"max_redemptions"`</span>
+    <span class="n">Name</span>             <span class="kt">string</span>            <span class="s">`json:"name"`</span>
+    <span class="n">Object</span>           <span class="kt">string</span>            <span class="s">`json:"object"`</span>
+    <span class="n">PercentOff</span>       <span class="kt">float64</span>           <span class="s">`json:"percent_off"`</span>
+    <span class="n">RedeemBy</span>         <span class="kt">int64</span>             <span class="s">`json:"redeem_by"`</span>
+    <span class="n">TimesRedeemed</span>    <span class="kt">int64</span>             <span class="s">`json:"times_redeemed"`</span>
+    <span class="n">Valid</span>            <span class="kt">bool</span>              <span class="s">`json:"valid"`</span>
+
+    <span class="c">// Non-primitive fields</span>
+    <span class="n">AppliesTo</span>        <span class="o">*</span><span class="n">CouponAppliesTo</span>  <span class="s">`json:"applies_to"`</span>
+    <span class="n">Currency</span>         <span class="n">Currency</span>          <span class="s">`json:"currency"`</span>
+    <span class="n">Duration</span>         <span class="n">CouponDuration</span>    <span class="s">`json:"duration"`</span>
+    <span class="n">Metadata</span>         <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span> <span class="s">`json:"metadata"`</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that I re-ordered the fields so that we have them divided into two groups,
+the first one with only <em>primitive</em> type fields, that is numerics, strings and booleans,
+and the following with the rest.</p>
+
+<h2 id="the-problem">The problem</h2>
+
+<p>In particular, when working with Stripe coupons, only one of the fields <code class="language-plaintext highlighter-rouge">AmountOff</code>
+and <code class="language-plaintext highlighter-rouge">PercentOff</code> may be set. In fact in the official Stripe API docs we can find
+this example coupon object</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18OmM8HA"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coupon"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount_off"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created"</span><span class="p">:</span><span class="w"> </span><span class="mi">1614605969</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"repeating"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"duration_in_months"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"livemode"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"max_redemptions"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25 off"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"percent_off"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"redeem_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1766448000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"times_redeemed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Where <code class="language-plaintext highlighter-rouge">percent_off</code> is not set. The <em>funny</em> part comes when you marshal the Go coupon object,
+which would look something like</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18OmM8HA"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coupon"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount_off"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created"</span><span class="p">:</span><span class="w"> </span><span class="mi">1614605969</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"repeating"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"duration_in_months"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"livemode"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"max_redemptions"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25 off"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"percent_off"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
+  </span><span class="nl">"redeem_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">1766448000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"times_redeemed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Why we get a <code class="language-plaintext highlighter-rouge">0</code> in the <code class="language-plaintext highlighter-rouge">percent_off</code> field?</strong></p>
+
+<h2 id="solution">Solution</h2>
+
+<blockquote>
+  <p>TL;DR: Use pointers 🥴</p>
+</blockquote>
+
+<p>If you have a closer look at the <code class="language-plaintext highlighter-rouge">stripe.Coupon</code> struct definition we
+see that the primitive fields are all non-pointer. Hence, we marshal the
+struct <code class="language-plaintext highlighter-rouge">cp</code> into bytes and look at it we get <a href="https://golang.org/ref/spec#The_zero_value">zero values</a>
+for all those primitive types which were not set initially (<code class="language-plaintext highlighter-rouge">PercentOff</code>, for instance).</p>
+
+<p>To illustrate this is a really simple environment, have a look at <a href="https://play.golang.org/p/BDOUlE6RHLH">this playground</a>:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"encoding/json"</span>
+    <span class="s">"fmt"</span>
+<span class="p">)</span>
+
+<span class="k">type</span> <span class="n">Drama</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">Primitive</span> <span class="kt">int</span>  <span class="s">`json:"primitive"`</span>
+    <span class="n">Ptr</span>       <span class="o">*</span><span class="kt">int</span> <span class="s">`json:"ptr"`</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// Both fields empty</span>
+    <span class="n">d</span> <span class="o">:=</span> <span class="n">Drama</span><span class="p">{}</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">json</span><span class="o">.</span><span class="n">MarshalIndent</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="s">"  "</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Which yields the output</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"primitive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"ptr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>With this last example we see that for the end user of the Stripe package it is
+<em>literally impossible</em> to know whether the field <code class="language-plaintext highlighter-rouge">PercentOff</code> was initially empty or not.</p>
+
+<h2 id="postmortem"><em>Postmortem</em></h2>
+
+<p>When we found the described issue, I immediately created <a href="https://github.com/stripe/stripe-go/issues/1255">an issue</a> 
+in the package repo, and after getting a <em>better implement your own package</em> response
+from one of the contributors we decided to fork…</p>
+
+<p>After forking the package repo to our <a href="https://github.com/Capchase/stripe-go"><em>pointered</em> version of stripe-go</a> I spend a
+number of (not few) hours migrating every primitive field of every struct of stripe
+to be pointers and making the tests pass… Which end up being much harder than expected
+because of a <em>hidden forgotten channel</em> in one of the tests (I may talk about that another day).</p>
+
+<p><img src="/assets/img/stripe-drama-1.PNG" alt="Small commit" /></p>
+
+<p>Finally, we deployed our own version and started using it, which yielded to the wanted results!</p>
+
+<p>If you liked this post <a href="https://twitter.com/voidisomorphism">ping me on Twitter</a> and… We’re hiring! Have a look 
+the open positions at Capchase <a href="https://www.notion.so/Capchase-Open-Roles-e7ce7acd6a464ee293e38120bac0b526">here</a>.</p>
+
+
+
+</div>
+
+<div class="pagination">
+  
+    <a href="/2021-03-01/test" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2020-03-29/aoc8" class="right arrow">&#8594;</a>
+  
+
+  <p>
+    
+    <b>#go-lang</b>
+    
+    <b>#pointers</b>
+    
+  </p>
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2021-03-01 18:22:16 +0100">2021</time> Taras Yarema.
+  </span>
+</footer>
+
+  </body>
+</html>

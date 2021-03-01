@@ -4,4 +4,5 @@ title: Projects
 permalink: /projects/
 ---
 
-This is _TODO_.
+This page is work in progress, meanwhile have a look at my Github [here](https://github.com/tarasyarema).
+
