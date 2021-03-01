@@ -29,5 +29,11 @@ plugins:
   - jekyll-paginate
   - jekyll-remote-theme
   - jekyll-seo-tag
+  - jekyll-analytics
 
 exclude: [ Gemfile, Gemfile.lock, tale.gemspec ]
+
+jekyll_analytics:
+  Plausible:
+    domain: 'tarasyarema.com'
+    source: 'https://plausible.example.com/js/plausible.js'
