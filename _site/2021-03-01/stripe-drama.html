@@ -4,6 +4,7 @@
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer-when-downgrade">
 
   <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Why using pointers is important | tarasyarema</title>
@@ -32,12 +33,11 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
 
+  <!-- Analytics-->
+  <script async defer data-domain="tarasyarema.com" src="https://stats.tarasyarema.com/js/index.js"></script>
+
   <!-- RSS -->
   <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="tarasyarema" />
-
-  <!-- Analytics-->
-  <script async defer data-domain="tarasyarema.com" src="https://plausible.io/js/plausible.js"></script>
-
 </head>
 
 
@@ -81,19 +81,19 @@
 The use case can be easily simplified: we need to keep some client data on
 our side so that we can operate with it easier than fetching it every time.
 For this purpose we use Go, and with it comes all the marshaling and
-un-marshaling that we need to handle when working with an API.</p>
+unmarshaling that we need to handle when working with an API.</p>
 
-<p>Good to us, Stripe offers a <a href="">Go handy package</a> to work with the API without having
+<p>Good to us, Stripe offers a <a href="https://github.com/stripe/stripe-go"><em>handy</em> Go package</a> to work with the API without having
 to handle all the calls manually.
 To illustrate this, let’s consider that we want to get a specific coupon, for that
 we could code the following function</p>
 
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">(</span>
-    <span class="s">"github.com/stripe/stripe-go"</span>
-    <span class="s">"github.com/stripe/stripe-go/coupon"</span>
+    <span class="s">"github.com/stripe/stripe-go/v72"</span>
+    <span class="s">"github.com/stripe/stripe-go/v72/coupon"</span>
 <span class="p">)</span>
 
-<span class="c">// We consider that the initial APi key setup has been done</span>
+<span class="c">// We consider that the initial API key setup has been done</span>
 <span class="c">// stripe.Key = "your_stripe_api_key"</span>
 
 <span class="c">// GetCoupon returns the Stripe coupon for the given id</span>
@@ -192,18 +192,25 @@ which would look something like</p>
 
 <p><strong>Why we get a <code class="language-plaintext highlighter-rouge">0</code> in the <code class="language-plaintext highlighter-rouge">percent_off</code> field?</strong></p>
 
+<p>If you have a closer look at the <code class="language-plaintext highlighter-rouge">stripe.Coupon</code> struct definition we
+see that the primitive fields are all non-pointer. Hence, we marshal the
+struct <code class="language-plaintext highlighter-rouge">cp</code> into bytes and look at it we get <a href="https://golang.org/ref/spec#The_zero_value">zero values</a>
+for all those primitive types which were not set initially (<code class="language-plaintext highlighter-rouge">PercentOff</code>, for instance).</p>
+
 <h2 id="solution">Solution</h2>
 
 <blockquote>
   <p>TL;DR: Use pointers 🥴</p>
 </blockquote>
 
-<p>If you have a closer look at the <code class="language-plaintext highlighter-rouge">stripe.Coupon</code> struct definition we
-see that the primitive fields are all non-pointer. Hence, we marshal the
-struct <code class="language-plaintext highlighter-rouge">cp</code> into bytes and look at it we get <a href="https://golang.org/ref/spec#The_zero_value">zero values</a>
-for all those primitive types which were not set initially (<code class="language-plaintext highlighter-rouge">PercentOff</code>, for instance).</p>
+<p>If we change the primitive fields to be pointers this problem is solved.
+As, when a field is unmarshaled from a <code class="language-plaintext highlighter-rouge">null</code> value, we will get a Go <code class="language-plaintext highlighter-rouge">nil</code>
+of the field type. This may be an issue because it forces the user to
+handle pointer logic. But one may use pointers <strong>always</strong> if the returned
+data can be nullable, because if not false data will <em>eventually</em> be served.</p>
 
-<p>To illustrate this is a really simple environment, have a look at <a href="https://play.golang.org/p/BDOUlE6RHLH">this playground</a>:</p>
+<p>To illustrate, in a more simple example and without using any external package,
+consider the following code which can be seen in a <a href="https://play.golang.org/p/BDOUlE6RHLH">playground</a>:</p>
 
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
 
@@ -225,7 +232,7 @@ for all those primitive types which were not set initially (<code class="languag
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Which yields the output</p>
+<p>The code outputs the following JSON string</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"primitive"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -233,8 +240,9 @@ for all those primitive types which were not set initially (<code class="languag
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>With this last example we see that for the end user of the Stripe package it is
-<em>literally impossible</em> to know whether the field <code class="language-plaintext highlighter-rouge">PercentOff</code> was initially empty or not.</p>
+<p>The actual problem of this is that the end user of the Stripe package (or any other
+package that do not use pointers on nullable fields) it is <em>literally impossible</em> to 
+know whether the field <code class="language-plaintext highlighter-rouge">PercentOff</code> was initially empty or not.</p>
 
 <h2 id="postmortem"><em>Postmortem</em></h2>
 
@@ -281,7 +289,7 @@ the open positions at Capchase <a href="https://www.notion.so/Capchase-Open-Role
 
     <footer>
   <span>
-    &copy; <time datetime="2021-03-01 18:22:16 +0100">2021</time> Taras Yarema.
+    &copy; <time datetime="2021-03-01 19:12:34 +0100">2021</time> Taras Yarema.
   </span>
 </footer>
 

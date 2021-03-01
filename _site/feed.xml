@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-03-01T18:22:16+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">tarasyarema</title><subtitle></subtitle><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><entry><title type="html">Test</title><link href="http://localhost:4000/2021-03-01/test" rel="alternate" type="text/html" title="Test" /><published>2021-03-01T11:10:34+01:00</published><updated>2021-03-01T11:10:34+01:00</updated><id>http://localhost:4000/2021-03-01/test</id><content type="html" xml:base="http://localhost:4000/2021-03-01/test">&lt;p&gt;This is an example of code type post.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-03-01T19:12:34+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">tarasyarema</title><subtitle></subtitle><author><name>Taras Yarema</name><email>tarasyarema@pm.me</email></author><entry><title type="html">Test</title><link href="http://localhost:4000/2021-03-01/test" rel="alternate" type="text/html" title="Test" /><published>2021-03-01T11:10:34+01:00</published><updated>2021-03-01T11:10:34+01:00</updated><id>http://localhost:4000/2021-03-01/test</id><content type="html" xml:base="http://localhost:4000/2021-03-01/test">&lt;p&gt;This is an example of code type post.&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
 
@@ -13,19 +13,19 @@
 The use case can be easily simplified: we need to keep some client data on
 our side so that we can operate with it easier than fetching it every time.
 For this purpose we use Go, and with it comes all the marshaling and
-un-marshaling that we need to handle when working with an API.&lt;/p&gt;
+unmarshaling that we need to handle when working with an API.&lt;/p&gt;
 
-&lt;p&gt;Good to us, Stripe offers a &lt;a href=&quot;&quot;&gt;Go handy package&lt;/a&gt; to work with the API without having
+&lt;p&gt;Good to us, Stripe offers a &lt;a href=&quot;https://github.com/stripe/stripe-go&quot;&gt;&lt;em&gt;handy&lt;/em&gt; Go package&lt;/a&gt; to work with the API without having
 to handle all the calls manually.
 To illustrate this, let’s consider that we want to get a specific coupon, for that
 we could code the following function&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;github.com/stripe/stripe-go&quot;&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;github.com/stripe/stripe-go/coupon&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;github.com/stripe/stripe-go/v72&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;github.com/stripe/stripe-go/v72/coupon&quot;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;// We consider that the initial APi key setup has been done&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// We consider that the initial API key setup has been done&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;// stripe.Key = &quot;your_stripe_api_key&quot;&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;// GetCoupon returns the Stripe coupon for the given id&lt;/span&gt;
@@ -124,18 +124,25 @@ which would look something like&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Why we get a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0&lt;/code&gt; in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;percent_off&lt;/code&gt; field?&lt;/strong&gt;&lt;/p&gt;
 
+&lt;p&gt;If you have a closer look at the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stripe.Coupon&lt;/code&gt; struct definition we
+see that the primitive fields are all non-pointer. Hence, we marshal the
+struct &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cp&lt;/code&gt; into bytes and look at it we get &lt;a href=&quot;https://golang.org/ref/spec#The_zero_value&quot;&gt;zero values&lt;/a&gt;
+for all those primitive types which were not set initially (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PercentOff&lt;/code&gt;, for instance).&lt;/p&gt;
+
 &lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;TL;DR: Use pointers 🥴&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;If you have a closer look at the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stripe.Coupon&lt;/code&gt; struct definition we
-see that the primitive fields are all non-pointer. Hence, we marshal the
-struct &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cp&lt;/code&gt; into bytes and look at it we get &lt;a href=&quot;https://golang.org/ref/spec#The_zero_value&quot;&gt;zero values&lt;/a&gt;
-for all those primitive types which were not set initially (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PercentOff&lt;/code&gt;, for instance).&lt;/p&gt;
+&lt;p&gt;If we change the primitive fields to be pointers this problem is solved.
+As, when a field is unmarshaled from a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;null&lt;/code&gt; value, we will get a Go &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nil&lt;/code&gt;
+of the field type. This may be an issue because it forces the user to
+handle pointer logic. But one may use pointers &lt;strong&gt;always&lt;/strong&gt; if the returned
+data can be nullable, because if not false data will &lt;em&gt;eventually&lt;/em&gt; be served.&lt;/p&gt;
 
-&lt;p&gt;To illustrate this is a really simple environment, have a look at &lt;a href=&quot;https://play.golang.org/p/BDOUlE6RHLH&quot;&gt;this playground&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;To illustrate, in a more simple example and without using any external package,
+consider the following code which can be seen in a &lt;a href=&quot;https://play.golang.org/p/BDOUlE6RHLH&quot;&gt;playground&lt;/a&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
 
@@ -157,7 +164,7 @@ for all those primitive types which were not set initially (&lt;code class=&quot
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Which yields the output&lt;/p&gt;
+&lt;p&gt;The code outputs the following JSON string&lt;/p&gt;
 
 &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;primitive&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -165,8 +172,9 @@ for all those primitive types which were not set initially (&lt;code class=&quot
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;With this last example we see that for the end user of the Stripe package it is
-&lt;em&gt;literally impossible&lt;/em&gt; to know whether the field &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PercentOff&lt;/code&gt; was initially empty or not.&lt;/p&gt;
+&lt;p&gt;The actual problem of this is that the end user of the Stripe package (or any other
+package that do not use pointers on nullable fields) it is &lt;em&gt;literally impossible&lt;/em&gt; to 
+know whether the field &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PercentOff&lt;/code&gt; was initially empty or not.&lt;/p&gt;
 
 &lt;h2 id=&quot;postmortem&quot;&gt;&lt;em&gt;Postmortem&lt;/em&gt;&lt;/h2&gt;
 
