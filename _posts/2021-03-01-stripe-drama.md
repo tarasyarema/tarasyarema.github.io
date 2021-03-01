@@ -13,20 +13,20 @@ Lately at [Capchase](https://capchase.com) we've been working with the [Stripe A
 The use case can be easily simplified: we need to keep some client data on
 our side so that we can operate with it easier than fetching it every time.
 For this purpose we use Go, and with it comes all the marshaling and
-un-marshaling that we need to handle when working with an API. 
+unmarshaling that we need to handle when working with an API. 
 
-Good to us, Stripe offers a [Go handy package]() to work with the API without having
+Good to us, Stripe offers a [_handy_ Go package](https://github.com/stripe/stripe-go) to work with the API without having
 to handle all the calls manually.
 To illustrate this, let's consider that we want to get a specific coupon, for that
 we could code the following function
 
 ```go
 import (
-    "github.com/stripe/stripe-go"
-    "github.com/stripe/stripe-go/coupon"
+    "github.com/stripe/stripe-go/v72"
+    "github.com/stripe/stripe-go/v72/coupon"
 )
 
-// We consider that the initial APi key setup has been done
+// We consider that the initial API key setup has been done
 // stripe.Key = "your_stripe_api_key"
 
 // GetCoupon returns the Stripe coupon for the given id
@@ -128,16 +128,23 @@ which would look something like
 
 **Why we get a `0` in the `percent_off` field?**
 
-## Solution
-
-> TL;DR: Use pointers 🥴
-
 If you have a closer look at the `stripe.Coupon` struct definition we
 see that the primitive fields are all non-pointer. Hence, we marshal the
 struct `cp` into bytes and look at it we get [zero values](https://golang.org/ref/spec#The_zero_value)
 for all those primitive types which were not set initially (`PercentOff`, for instance).
 
-To illustrate this is a really simple environment, have a look at [this playground](https://play.golang.org/p/BDOUlE6RHLH):
+## Solution
+
+> TL;DR: Use pointers 🥴
+
+If we change the primitive fields to be pointers this problem is solved.
+As, when a field is unmarshaled from a `null` value, we will get a Go `nil`
+of the field type. This may be an issue because it forces the user to
+handle pointer logic. But one may use pointers **always** if the returned
+data can be nullable, because if not false data will _eventually_ be served.
+
+To illustrate, in a more simple example and without using any external package,
+consider the following code which can be seen in a [playground](https://play.golang.org/p/BDOUlE6RHLH):
 
 ```go
 package main
@@ -160,7 +167,7 @@ func main() {
 }
 ```
 
-Which yields the output
+The code outputs the following JSON string
 
 ```json
 {
@@ -169,8 +176,9 @@ Which yields the output
 }
 ```
 
-With this last example we see that for the end user of the Stripe package it is
-_literally impossible_ to know whether the field `PercentOff` was initially empty or not.
+The actual problem of this is that the end user of the Stripe package (or any other
+package that do not use pointers on nullable fields) it is _literally impossible_ to 
+know whether the field `PercentOff` was initially empty or not.
 
 ## _Postmortem_
 
